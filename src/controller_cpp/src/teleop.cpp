@@ -33,7 +33,7 @@ class ControllerNode : public rclcpp::Node{
         RCLCPP_INFO(this->get_logger(), "Controller Error"); 
       }
 
-      // Publish the Twist message to the "telop" topic
+      // Publish the Twist message to the "teleop" topic
       twist_publisher_->publish(twist_publish);
     }
   public:
@@ -42,8 +42,8 @@ class ControllerNode : public rclcpp::Node{
       // Create a subscription to the "joy" topic with a queue size of 10, and bind the joy_to_twist callback function to handle incoming messages
       joy_subscription_ = this->create_subscription<sensor_msgs::msg::Joy>("joy",10,std::bind(&ControllerNode::joy_to_twist,this,std::placeholders::_1)); 
 
-      // Create a publisher for the "telop" topic with a queue size of 10, which will publish Twist messages
-      twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("telop",10);
+      // Create a publisher for the "teleop" topic with a queue size of 10, which will publish Twist messages
+      twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("teleop",10);
     }
 };
 
